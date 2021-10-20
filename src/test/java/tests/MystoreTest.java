@@ -9,13 +9,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
 
 import java.util.concurrent.TimeUnit;
+
+import static org.openqa.selenium.By.xpath;
 
 public class MystoreTest {
 
     private WebDriver driver;
+
 
     @Given("user is on the mystore-testlab website")
     public void userIsOnTheMystoreTestlabWebsite() {
@@ -30,7 +32,7 @@ public class MystoreTest {
 
     @When("user clicks Sign in")
     public void userClicksSignIn() {
-        WebElement signIn = driver.findElement(By.xpath("//span[text()='Sign in']"));
+        WebElement signIn = driver.findElement(xpath("//span[text()='Sign in']"));
         signIn.click();
     }
 
@@ -53,8 +55,15 @@ public class MystoreTest {
     @When("user clicks Addresses button")
     public void userClicksAddressesButton() {
 
-        WebElement addFirstAddress = driver.findElement(By.id("address-link"));
-        addFirstAddress.click();
+//        WebElement addFirstAddress = driver.findElement(By.id("address-link"));
+//        addFirstAddress.click();
+
+        WebElement Address = driver.findElement(xpath("(//span[@class='link-item'])[2]"));
+        Address.click();
+
+        WebElement createNewAddress = driver.findElement(xpath("//span[text()='Create new address']"));
+        createNewAddress.click();
+
     }
 
     @When("user fills {string} as Alias, {string} as Address, {string} as City, {string} as zip postal code, {string} as Country, {string} as Phone")
@@ -76,7 +85,7 @@ public class MystoreTest {
         WebElement countryDropDown = driver.findElement(By.name("id_country"));
         countryDropDown.click();
 
-        WebElement countryUnitedKingdom = driver.findElement(By.xpath("//option[@value='17']"));
+        WebElement countryUnitedKingdom = driver.findElement(xpath("//option[@value='17']"));
         countryUnitedKingdom.click();
 
         WebElement phone = driver.findElement(By.name("phone"));
@@ -88,38 +97,45 @@ public class MystoreTest {
     @And("user clicks save")
     public void userClicksRegister() {
 
-        WebElement saveButton = driver.findElement(By.xpath("//button[@class='btn btn-primary float-xs-right']"));
+        WebElement saveButton = driver.findElement(xpath("//button[@class='btn btn-primary float-xs-right']"));
         saveButton.click();
     }
 
-    @Then("Address successfully added! is displayed")
-    public void successIsDisplayed() throws InterruptedException {
+    @Then("Address successfully added! is displayed {string} {string} {string} {string} {string} {string}")
+    public void successIsDisplayed(String Alias, String Address, String City, String zip_postal_code, String Country, String Phone) {
 
-        WebElement komunikatOutput = driver.findElement(By.xpath("//*[text()='Address successfully added!']"));
+
+        WebElement komunikatOutput = driver.findElement(xpath("//*[text()='Address successfully added!']"));
         String komunikatSukcesu = komunikatOutput.getText();
         System.out.println(komunikatSukcesu);
 
-        Assertions.assertEquals("Address successfully added!", komunikatSukcesu);
+//        WebElement addedAlias = driver.findElement(xpath("(//div[@class='address-body']/h4)[2]"));
+        WebElement addedAddress = driver.findElement(xpath("(//div[@class='address-body'])[2]"));
 
-//        Thread.sleep(10000);
+        System.out.println(addedAddress.getText());
+
+        String sprawdzany_adres =  Alias + "\n" + "Lukas Ganko" + "\n" + Address + "\n" + City + "\n" + zip_postal_code + "\n" + Country + "\n" + Phone;
+
+        System.out.println(sprawdzany_adres);
+        Assertions.assertEquals(sprawdzany_adres, addedAddress.getText());
 
 
     }
 
     @When("user clicks Delete")
-    public void userClicksDeleteAddress() throws InterruptedException {
+    public void userClicksDeleteAddress() {
 
-        WebElement deleteAdress = driver.findElement(By.xpath("//span[text()='Delete']"));
+        WebElement deleteAdress = driver.findElement(xpath("(//span[text()='Delete'])[2]"));
         deleteAdress.click();
 
-//        Thread.sleep(10000);
+
     }
 
 
     @Then("Address successfully deleted! is displayed")
     public void deleteIsDisplayed() {
 
-        WebElement komunikatDeleteOutput = driver.findElement(By.xpath("//*[text()='Address successfully deleted!']"));
+        WebElement komunikatDeleteOutput = driver.findElement(xpath("//*[text()='Address successfully deleted!']"));
         String komunikatDelete = komunikatDeleteOutput.getText();
         System.out.println(komunikatDelete);
 

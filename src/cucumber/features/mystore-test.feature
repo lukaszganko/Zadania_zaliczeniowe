@@ -9,7 +9,7 @@ Feature: Mystore Test
     When user clicks Addresses button
     When user fills "<alias>" as Alias, "<address>" as Address, "<city>" as City, "<zip_postal_code>" as zip postal code, "<country>" as Country, "<phone>" as Phone
     And user clicks save
-    Then Address successfully added! is displayed
+    Then Address successfully added! is displayed "<alias>" "<address>" "<city>" "<zip_postal_code>" "<country>" "<phone>"
     When user clicks Delete
     Then Address successfully deleted! is displayed
 
