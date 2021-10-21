@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.io.FileHandler;
 import pages.mystore.ClothesPage;
 import pages.mystore.LoginPage;
 import pages.mystore.MainPage;
@@ -28,10 +29,10 @@ public class Zadanie2 {
     WebDriver driver;
 
     @BeforeEach
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         driver = Utils.setUpAndOpenMyStore();
         driver.get("https://mystore-testlab.coderslab.pl/");
-        Thread.sleep(5000);
+
     }
 
     @Test
@@ -40,6 +41,9 @@ public class Zadanie2 {
         LoginPage loginPage = new LoginPage(driver);
         YourAccount yourAccount = new YourAccount(driver);
         ClothesPage clothesPage = new ClothesPage(driver);
+        String filepath = "target\\zrzuty\\orderScreen"+ System.currentTimeMillis()+".jpg";
+
+        Utils utils = new Utils();
         String mail = "aaaaaaaaaa@wp.pl";
         String password = "qwerty123";
 
@@ -47,15 +51,16 @@ public class Zadanie2 {
         loginPage.logInToMyStore(mail, password);
         yourAccount.clothesCategory.click();
         clothesPage.addClothes("XL", "2");
-
-
+        try {
+            utils.takeSnapShot(driver, filepath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
 
-
-
-
+//        @AfterEach
 
 
 }
