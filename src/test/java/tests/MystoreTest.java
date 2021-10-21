@@ -1,5 +1,6 @@
 package tests;
 
+import common.Utils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,26 +9,20 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.By.xpath;
 
-public class MystoreTest {
+public class MystoreTest extends Utils {
 
     private WebDriver driver;
 
 
     @Given("user is on the mystore-testlab website")
     public void userIsOnTheMystoreTestlabWebsite() {
-        System.setProperty("webdriver.chrome.driver",
-                "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://mystore-testlab.coderslab.pl/");
+
+        driver = Utils.setUpAndOpenMyStore();
+//        driver.get("https://mystore-testlab.coderslab.pl/");
 
     }
 
