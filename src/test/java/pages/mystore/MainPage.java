@@ -7,15 +7,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
-    private WebDriver driver;
+    public WebDriver driver;
 
-    @FindBy
-    WebElement signIn = driver.findElement(By.xpath("//span[text()='Sign in']"));
-
+    @FindBy(xpath = "//span[text()='Sign in']")
+    public WebElement signIn;
 
     public MainPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    public void clickSign() {
+        signIn.click();
     }
 
 

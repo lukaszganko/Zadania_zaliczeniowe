@@ -8,18 +8,26 @@ import org.openqa.selenium.support.PageFactory;
 
 public class YourAccount {
 
-    private WebDriver driver;
+    public WebDriver driver;
 
-    @FindBy
-    WebElement addFirstAddress = driver.findElement(By.id("address-link"));
-//    WebElement addFirstAddress = driver.findElement(By.xpath("//i[text()='\uE567']"));
+    @FindBy(id = "address-link")
+    public WebElement addFirstAddress;
 
-    WebElement deleteAdress = driver.findElement(By.xpath("span[text()='Delete']"));
+    @FindBy(xpath = "//span[text()='Delete']")
+    public WebElement deleteAdress;
 
+    @FindBy(xpath = "//li[@class='category'][@id='category-3']")
+    public WebElement clothesCategory;
+
+
+    public void findClothes(){
+        clothesCategory.click();
+
+    }
 
 
     public YourAccount(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 }

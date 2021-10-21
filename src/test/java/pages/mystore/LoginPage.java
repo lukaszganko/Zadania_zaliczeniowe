@@ -7,20 +7,26 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
-    private WebDriver driver;
+    public WebDriver driver;
 
     @FindBy(name = "email")
-    private WebElement emailInput;
+    public WebElement emailInput;
 
     @FindBy(name = "password")
-    private WebElement passwordInput;
+    public WebElement passwordInput;
 
     @FindBy(id = "submit-login")
-    private WebElement signInButton;
+    public WebElement signInButton;
 
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
+    }
+
+    public void logInToMyStore(String email, String password){
+        emailInput.sendKeys(email);
+        passwordInput.sendKeys(password);
+        signInButton.click();
     }
 
 }
