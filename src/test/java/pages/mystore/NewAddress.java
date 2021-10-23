@@ -5,38 +5,50 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class NewAddress {
     private WebDriver driver;
 
 
-    @FindBy
-    WebElement alias = driver.findElement(By.name("alias"));
+    @FindBy (name ="alias")
+    public WebElement aliasInput;
 
-    @FindBy
-    WebElement address = driver.findElement(By.name("address1"));
+    @FindBy(name = "address1")
+    public WebElement addressInput;
 
-    @FindBy
-    WebElement city = driver.findElement(By.name("city"));
+    @FindBy (name = "city")
+    public WebElement cityInput;
 
-    @FindBy
-    WebElement zipPostalCode = driver.findElement(By.name("postcode"));
+    @FindBy (name = "postcode")
+    public WebElement zipPostalCodeInput;
 
-    @FindBy
-    WebElement countryDropDown = driver.findElement(By.name("id_country"));
+    @FindBy (name = "id_country")
+    public WebElement countryDropDownInput;
 
-    @FindBy
-    WebElement countryUnitedKingdom = driver.findElement(By.xpath("//option[@value='17']"));
+//    @FindBy
+//    WebElement countryUnitedKingdom = driver.findElement(By.xpath("//option[@value='17']"));
 
-    @FindBy
-    WebElement phone = driver.findElement(By.name("phone"));
+    @FindBy (name="phone")
+    public WebElement phoneInput;
 
-    @FindBy
-    WebElement saveButton = driver.findElement(By.name("submitAddress"));
+    @FindBy (xpath = "//button[@class='btn btn-primary float-xs-right']")
+    public WebElement saveButton;
 
 
     public NewAddress(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+
+    public void createNewAddress(String alias, String address, String city, String zip_postal_code, String country, String phone){
+        aliasInput.sendKeys(alias);
+        addressInput.sendKeys(address);
+        cityInput.sendKeys(city);
+        zipPostalCodeInput.sendKeys(zip_postal_code);
+        Select countryDropDown = new Select(countryDropDownInput);
+        countryDropDown.selectByVisibleText(country);
+        phoneInput.sendKeys(phone);
     }
 }

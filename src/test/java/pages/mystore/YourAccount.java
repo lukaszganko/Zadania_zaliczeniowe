@@ -13,12 +13,23 @@ public class YourAccount {
     @FindBy(id = "address-link")
     public WebElement addFirstAddress;
 
-    @FindBy(xpath = "//span[text()='Delete']")
+    @FindBy(xpath= "(//span[@class='link-item'])[2]")
+    public WebElement address;
+
+    @FindBy(xpath= "//span[text()='Create new address']")
+    public WebElement createNewAddress;
+
+    @FindBy(xpath = "(//span[text()='Delete'])[2]")
     public WebElement deleteAdress;
 
     @FindBy(xpath = "//li[@class='category'][@id='category-3']")
     public WebElement clothesCategory;
 
+    @FindBy(xpath= "(//div[@class='address-body'])[2]")
+    public WebElement addedAddress;
+
+    @FindBy(xpath = "//*[text()='Address successfully deleted!']")
+    public WebElement komunikatDelete;
 
     public void findClothes(){
         clothesCategory.click();

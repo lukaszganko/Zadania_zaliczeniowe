@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class Utils {
-    protected static WebDriver driver;
+//    protected static WebDriver driver;
 
     public static   WebDriver setUpAndOpenMyStore() {
         System.setProperty("webdriver.chrome.driver",

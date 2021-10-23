@@ -29,4 +29,9 @@ public class LoginPage {
         signInButton.click();
     }
 
+    public void logInToMyStoreCucumber(String email, String password){
+        emailInput.sendKeys(email);
+        passwordInput.sendKeys(password);
+    }
+
 }

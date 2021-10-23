@@ -31,7 +31,6 @@ public class Zadanie2 {
     @BeforeEach
     public void setUp() {
         driver = Utils.setUpAndOpenMyStore();
-        driver.get("https://mystore-testlab.coderslab.pl/");
 
     }
 
@@ -50,7 +49,7 @@ public class Zadanie2 {
         mainPage.clickSign();
         loginPage.logInToMyStore(mail, password);
         yourAccount.clothesCategory.click();
-        clothesPage.addClothes("XL", "2");
+        clothesPage.addClothes("XL", "5");
         try {
             utils.takeSnapShot(driver, filepath);
         } catch (Exception e) {
