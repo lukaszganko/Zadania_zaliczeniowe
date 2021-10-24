@@ -69,7 +69,7 @@ public class ClothesPage {
         double discount = regularPriceBrownSweaterCalculations * 20 / 100;
         double sweaterAfterDiscount = regularPriceBrownSweaterCalculations - discount;
 
-        System.out.println("Price of a a brown sweater after discount: " + sweaterAfterDiscount);
+        System.out.println("Price of a brown sweater after discount: " + sweaterAfterDiscount);
 
         String priceBrownBearSweaterDiscount = brownBearSweaterDiscountPrice.getText().replaceAll("€", "");
         Double priceBrownBearSweaterDiscountCalculations = Double.valueOf(priceBrownBearSweaterDiscount);

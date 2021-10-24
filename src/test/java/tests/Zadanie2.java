@@ -27,7 +27,7 @@ public class Zadanie2 {
         LoginPage loginPage = new LoginPage(driver);
         YourAccount yourAccount = new YourAccount(driver);
         ClothesPage clothesPage = new ClothesPage(driver);
-        String filepath = "target\\zrzuty\\orderScreen" + System.currentTimeMillis() + ".jpg";
+        String filepath = "target\\orderScreen" + System.currentTimeMillis() + ".jpg";
 
         Utils utils = new Utils();
         String mail = "aaaaaaaaaa@wp.pl";
