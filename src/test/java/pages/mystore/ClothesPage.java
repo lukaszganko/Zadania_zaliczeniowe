@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ClothesPage {
     public WebDriver driver;
-//    WebDriverWait wait = new WebDriverWait(driver, 15);
-
 
     @FindBy(xpath = "//img[@alt='Brown bear printed sweater']")
     public WebElement brownBearSweater;
@@ -62,7 +60,7 @@ public class ClothesPage {
     }
 
 
-    public void addClothes(String size, String quantity) {
+    public void addClothes(String size, String quantity) throws InterruptedException {
         String regularPriceBrownSweater = brownBearSweaterRegularPrice.getText().replaceAll("€", "");
         Double regularPriceBrownSweaterCalculations = Double.valueOf(regularPriceBrownSweater);
 
@@ -87,8 +85,7 @@ public class ClothesPage {
         quantityInput.clear();
         quantityInput.sendKeys(quantity);
         addToCartButton.click();
-        //dodać potencjalnego waita
-//        wait.until(ExpectedConditions.elementToBeClickable(proceedToCheckout));
+        Thread.sleep(5000);
         proceedToCheckout.click();
         proceedToCheckout.click();
         shippingMethodSection.click();

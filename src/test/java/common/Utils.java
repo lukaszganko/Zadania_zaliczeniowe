@@ -25,20 +25,14 @@ public class Utils {
         return driver;
     }
 
-
     public static void takeSnapShot(WebDriver webdriver, String fileWithPath) throws Exception {
         TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
         File DestFile = new File(fileWithPath);
         FileHandler.copy(SrcFile, DestFile);
-
     }
 
 }
-
-
-
-
 
 
 

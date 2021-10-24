@@ -1,6 +1,7 @@
 package tests;
 
 import common.Utils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +19,10 @@ public class Zadanie2 {
     @BeforeEach
     public void setUp() {
         driver = Utils.setUpAndOpenMyStore();
-
     }
 
     @Test
-    public void logInAndShopping() {
+    public void logInAndShopping() throws InterruptedException {
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         YourAccount yourAccount = new YourAccount(driver);
@@ -56,29 +56,21 @@ public class Zadanie2 {
         String orderReference = clothesPage.orderDetails.getText().substring(32, 41);
         System.out.println("Order reference is: " + orderReference);
 
-        driver.findElement(By.xpath("//a[@class='account']")).click();
-        driver.findElement(By.xpath("(//i[@class='material-icons'])[4]")).click();
-
+        mainPage.account.click();
+        yourAccount.orderHistoryAndDetails.click();
         WebElement correctOrderNumber = driver.findElement(By.xpath("//th[text()='" + orderReference + "']"));
         System.out.println("Correct order number: " + correctOrderNumber.getText());
-
-        WebElement correcInvoice = driver.findElement(By.xpath("(//span[@class='label label-pill bright'])[1]"));
-        WebElement correctTotalValue = driver.findElement(By.xpath("(//td[@class='text-xs-right'])[1]"));
-
-        System.out.println("Correct total price: " + correctTotalValue.getText());
-
+        System.out.println("Correct total price: " + yourAccount.correctTotalValue.getText());
 
         Assertions.assertEquals(orderReference, correctOrderNumber.getText());
-        Assertions.assertEquals("Awaiting check payment", correcInvoice.getText());
-        Assertions.assertEquals(String.format("%.2f", totalPrice).replaceAll(",", "."), correctTotalValue.getText().replaceAll("€", ""));
-
+        Assertions.assertEquals("Awaiting check payment", yourAccount.correcInvoice.getText());
+        Assertions.assertEquals(String.format("%.2f", totalPrice).replaceAll(",", "."), yourAccount.correctTotalValue.getText().replaceAll("€", ""));
 
     }
 
-//        @AfterEach
-
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
+    }
 
 }
-
-
-
