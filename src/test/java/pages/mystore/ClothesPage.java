@@ -5,9 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 public class ClothesPage {
     public WebDriver driver;
@@ -65,19 +64,21 @@ public class ClothesPage {
 
     public void addClothes(String size, String quantity) {
         String regularPriceBrownSweater = brownBearSweaterRegularPrice.getText().replaceAll("€", "");
-        Double regularPriceBrownSweater2 = Double.valueOf(regularPriceBrownSweater);
+        Double regularPriceBrownSweaterCalculations = Double.valueOf(regularPriceBrownSweater);
 
-        System.out.println(regularPriceBrownSweater2);
+        System.out.println("Regular price of a brown sweater: " + regularPriceBrownSweaterCalculations);
 
-        double rabat = regularPriceBrownSweater2 * 20/100;
-        double obliczonyRabat = regularPriceBrownSweater2 - rabat;
+        double discount = regularPriceBrownSweaterCalculations * 20 / 100;
+        double sweaterAfterDiscount = regularPriceBrownSweaterCalculations - discount;
 
-        System.out.println(obliczonyRabat);
+        System.out.println("Price of a a brown sweater after discount: " + sweaterAfterDiscount);
 
-        String brownBearSweaterDiscountPricebezEuro = brownBearSweaterDiscountPrice.getText().replaceAll("€", "");
-        Double brownBearSweaterDiscountPricebezEuro2 = Double.valueOf(brownBearSweaterDiscountPricebezEuro);
-        if (obliczonyRabat==brownBearSweaterDiscountPricebezEuro2){
-            System.out.println("Rabat wyliczony jest prawidłowo");
+        String priceBrownBearSweaterDiscount = brownBearSweaterDiscountPrice.getText().replaceAll("€", "");
+        Double priceBrownBearSweaterDiscountCalculations = Double.valueOf(priceBrownBearSweaterDiscount);
+        if (sweaterAfterDiscount == priceBrownBearSweaterDiscountCalculations) {
+            System.out.println("The discount on the sweater is correctly calculated");
+        } else {
+            System.out.println("The discount on the sweater is incorrectly calculated");
         }
 
         brownBearSweater.click();
@@ -97,7 +98,7 @@ public class ClothesPage {
         paymentSection.click();
         payByCheckRadioButton.click();
         agreeToTheTermsCheckbox.click();
-        System.out.println("Total price: " + totalValue.getText());
+        System.out.println("Total order price: " + totalValue.getText());
         orderWithAnObligationToPayButton.click();
 
         System.out.println(orderDetails.getText());

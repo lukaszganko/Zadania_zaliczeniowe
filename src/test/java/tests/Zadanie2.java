@@ -1,25 +1,15 @@
 package tests;
 
 import common.Utils;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.it.Ma;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
-import org.openqa.selenium.io.FileHandler;
+
 import pages.mystore.ClothesPage;
 import pages.mystore.LoginPage;
 import pages.mystore.MainPage;
 import pages.mystore.YourAccount;
-
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Formatter;
 
 
 public class Zadanie2 {
@@ -32,7 +22,7 @@ public class Zadanie2 {
     }
 
     @Test
-    public void registerNewUser() {
+    public void logInAndShopping() {
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         YourAccount yourAccount = new YourAccount(driver);
@@ -54,7 +44,7 @@ public class Zadanie2 {
         double totalPrice = price * 28.72;
 
 
-        System.out.println("cena " + String.format("%.2f", totalPrice));
+        System.out.println("The price for the order " + String.format("%.2f", totalPrice));
 
         clothesPage.addClothes(size, quantity);
         try {
@@ -75,12 +65,12 @@ public class Zadanie2 {
         WebElement correcInvoice = driver.findElement(By.xpath("(//span[@class='label label-pill bright'])[1]"));
         WebElement correctTotalValue = driver.findElement(By.xpath("(//td[@class='text-xs-right'])[1]"));
 
-        System.out.println(correctTotalValue.getText());
+        System.out.println("Correct total price: " + correctTotalValue.getText());
 
 
         Assertions.assertEquals(orderReference, correctOrderNumber.getText());
         Assertions.assertEquals("Awaiting check payment", correcInvoice.getText());
-        Assertions.assertEquals(String.format("%.2f", totalPrice).replaceAll(",", "."),correctTotalValue.getText().replaceAll("€", "") );
+        Assertions.assertEquals(String.format("%.2f", totalPrice).replaceAll(",", "."), correctTotalValue.getText().replaceAll("€", ""));
 
 
     }
