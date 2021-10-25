@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class ClothesPage {
@@ -60,7 +62,8 @@ public class ClothesPage {
     }
 
 
-    public void addClothes(String size, String quantity) throws InterruptedException {
+    public void addClothes(String size, String quantity){
+        WebDriverWait wait = new WebDriverWait(driver, 25);
         String regularPriceBrownSweater = brownBearSweaterRegularPrice.getText().replaceAll("€", "");
         Double regularPriceBrownSweaterCalculations = Double.valueOf(regularPriceBrownSweater);
 
@@ -85,7 +88,7 @@ public class ClothesPage {
         quantityInput.clear();
         quantityInput.sendKeys(quantity);
         addToCartButton.click();
-        Thread.sleep(5000);
+        wait.until(ExpectedConditions.elementToBeClickable(proceedToCheckout));
         proceedToCheckout.click();
         proceedToCheckout.click();
         shippingMethodSection.click();

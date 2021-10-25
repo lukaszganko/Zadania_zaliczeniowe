@@ -21,7 +21,7 @@ public class Utils {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://mystore-testlab.coderslab.pl/");
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
         return driver;
     }
 

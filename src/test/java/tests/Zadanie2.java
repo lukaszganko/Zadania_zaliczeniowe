@@ -22,7 +22,7 @@ public class Zadanie2 {
     }
 
     @Test
-    public void logInAndShopping() throws InterruptedException {
+    public void logInAndShopping(){
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         YourAccount yourAccount = new YourAccount(driver);
@@ -37,11 +37,10 @@ public class Zadanie2 {
         loginPage.logInToMyStore(mail, password);
         yourAccount.clothesCategory.click();
 
-
         String size = "XL";
         String quantity = "5";
-        Double price = Double.valueOf(quantity);
-        double totalPrice = price * 28.72;
+        Double quantityCalculations = Double.valueOf(quantity);
+        double totalPrice = quantityCalculations * 28.72;
 
 
         System.out.println("The price for the order " + String.format("%.2f", totalPrice));
